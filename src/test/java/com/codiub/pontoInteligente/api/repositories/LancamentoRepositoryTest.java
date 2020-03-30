@@ -1,21 +1,24 @@
 package com.codiub.pontoInteligente.api.repositories;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.codiub.pontoInteligente.api.entities.Empresa;
 import com.codiub.pontoInteligente.api.entities.Funcionario;
@@ -24,9 +27,10 @@ import com.codiub.pontoInteligente.api.enums.PerfilEnum;
 import com.codiub.pontoInteligente.api.enums.TipoEnum;
 import com.codiub.pontoInteligente.api.utils.PasswordUtils;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
+@TestInstance(Lifecycle.PER_CLASS)
+@ExtendWith(SpringExtension.class)
 public class LancamentoRepositoryTest {
 	
 	@Autowired
@@ -40,7 +44,7 @@ public class LancamentoRepositoryTest {
 	
 	private Long funcionarioId;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 		Empresa empresa = this.empresaRepository.save(obterDadosEmpresa());
 		
@@ -51,7 +55,7 @@ public class LancamentoRepositoryTest {
 		this.lancamentoRepository.save(obterDadosLancamentos(funcionario));
 	}
 
-	@After
+	@AfterAll
 	public void tearDown() throws Exception {
 		this.empresaRepository.deleteAll();
 	}
@@ -63,13 +67,13 @@ public class LancamentoRepositoryTest {
 		assertEquals(2, lancamentos.size());
 	}
 	
-//	@Test
-//	public void testBuscarLancamentosPorFuncionarioIdPaginado() {
-//		PageRequest page = new PageRequest(0, 10, null);
-//		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(funcionarioId, page);
-//		
-//		assertEquals(2, lancamentos.getTotalElements());
-//	}
+	@Test
+	public void testBuscarLancamentosPorFuncionarioIdPaginado() {
+		PageRequest page = PageRequest.of(0, 10);
+		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(funcionarioId, page);
+		
+		assertEquals(2, lancamentos.getTotalElements());
+	}
 	
 	private Lancamento obterDadosLancamentos(Funcionario funcionario) {
 		Lancamento lancameto = new Lancamento();

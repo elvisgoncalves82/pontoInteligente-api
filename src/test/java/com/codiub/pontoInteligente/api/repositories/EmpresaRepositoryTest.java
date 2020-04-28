@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +17,6 @@ import com.codiub.pontoInteligente.api.entities.Empresa;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@TestInstance(Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
 public class EmpresaRepositoryTest {
 	

@@ -30,19 +30,21 @@ public class LancamentoServiceImpl implements LancamentoService{
 
 	@Override
 	public Optional<Lancamento> BuscarPorId(Long id) {
-		// TODO Auto-generated method stub
+		log.info("Bucando lançamentos para o funcionario ID {}", id);
+	//	return Optional.ofNullable(lancamentoRepository.findOne(id));
 		return null;
 	}
 
 	@Override
 	public Lancamento Persistir(Lancamento lancamento) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Persistindo lancamento {}", lancamento);
+		return this.lancamentoRepository.save(lancamento);
 	}
 
 	@Override
-	public void Remover(Long id) {
-		// TODO Auto-generated method stub
+	public void Remover(Lancamento lancamento) {
+		log.info("Persistindo lancamento {}", lancamento);
+		this.lancamentoRepository.delete(lancamento);
 		
 	}
 

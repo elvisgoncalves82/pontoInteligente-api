@@ -29,7 +29,13 @@ public interface FuncionarioService {
 	 */
 	Optional<Funcionario>buscarPorEmail(String email);
 	
-	
+	/**
+	 * Busca e retorna um funcionário por ID.
+	 * 
+	 * @param id
+	 * @return Optional<Funcionario>
+	 */
+	Optional<Funcionario> buscarPorId(Long id);
 	
 
 }

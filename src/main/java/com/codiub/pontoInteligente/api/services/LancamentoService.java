@@ -15,7 +15,7 @@ public interface LancamentoService {
 	 * @author elvis
 	 *
 	 */
-	Page<Lancamento> BuscarPorFuncionarioId(Long FuncionarioId, PageRequest pageRequest);
+	Page<Lancamento> buscarPorFuncionarioId(Long FuncionarioId, PageRequest pageRequest);
 	
 	
 	/**
@@ -23,7 +23,7 @@ public interface LancamentoService {
 	 * @param id
 	 * @return
 	 */
-	Optional<Lancamento> BuscarPorId(Long id);
+	Optional<Lancamento> buscarPorId(Long id);
 	
 	
 	/**
@@ -31,13 +31,16 @@ public interface LancamentoService {
 	 * @param lancamento
 	 * @return
 	 */
-	Lancamento Persistir(Lancamento lancamento);
+	Lancamento persistir(Lancamento lancamento);
+	
 	
 	/**
-	 * Remove um lançamento da base de dados
+	 * Remove um lançamento da base de dados.
+	 * 
 	 * @param id
 	 */
-	void Remover(Lancamento lancamento);
+	void remover(Long id);
+
 	
 	
 }

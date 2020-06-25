@@ -1,6 +1,7 @@
 package com.codiub.pontoInteligente.api.services;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -51,12 +52,15 @@ public class LancamentoServiceTest {
 	
 	@Test
 	public void testBuscarLancamentoPorId() {
-		Optional <Lancamento> lancamento = this.lancamentoService.BuscarPorId(1L);
+		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorId(1L);
+
+		assertTrue(lancamento.isPresent());
 	}
 	
 	@Test
-	public void persistirLancamento() {
-		Lancamento lancamento = this.lancamentoRepository.save(new Lancamento());
+	public void testPersistirLancamento() {
+		Lancamento lancamento = this.lancamentoService.persistir(new Lancamento());
+
 		assertNotNull(lancamento);
 	}
 	
